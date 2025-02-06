@@ -1,0 +1,18 @@
+var countStudents = function(students, sandwiches) {
+    const studentQueue = students.slice();
+    const sandwichStack = sandwiches.slice().reverse();
+    
+    let lastServed = 0;
+    while (studentQueue.length > 0 && lastServed < studentQueue.length) {
+        if (sandwichStack[sandwichStack.length - 1] === studentQueue[0]) {
+            sandwichStack.pop();
+            studentQueue.shift();
+            lastServed = 0;
+        } else {
+            studentQueue.push(studentQueue.shift());
+            lastServed++;
+        }
+    }
+    
+    return studentQueue.length;
+};
